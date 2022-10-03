@@ -1,13 +1,15 @@
+import AuthForm from "./components/Auth/AuthForm";
 import NavBar from "./components/Navbar/NavBar";
+import StartingPageContent from "./components/StartingPage/StartingPageContent";
 function App() {
   return (
     <>
-      <NavBar />
-      {/* about */}
+      <StartingPageContent />
       {/* subscription dropdowns which is a clickable button: */}
       {/* duaration of subscription */}
       {/* subjects */}
       {/* payment */}
+      {/* about */}
     </>
   );
 }
