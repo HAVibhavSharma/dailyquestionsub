@@ -6,6 +6,7 @@ const AuthForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const [isLogin, setIsLogin] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -16,6 +17,8 @@ const AuthForm = () => {
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
+
+    setIsLoading(true);
 
     if (isLogin) {
     } else {
@@ -33,6 +36,7 @@ const AuthForm = () => {
           }
         }
       ).then(res => {
+        setIsLoading(false);
         if(res.ok){
 
         }else {
@@ -42,7 +46,7 @@ const AuthForm = () => {
               errormessage = data.error.message
             }
             // alert(errormessage);
-            return errormessage;
+            return  document.getElementById("return").innerHTML = errormessage;
           });
         }
       });
@@ -66,8 +70,10 @@ const AuthForm = () => {
             ref={passwordInputRef}
           />
         </div>
+        <div id ='return' className={classes.return}></div>
         <div className={classes.actions}>
-          <button>{isLogin ? "Login" : "Create Account"}</button>
+          {!isLoading && <button>{isLogin ? "Login" : "Create Account"}</button> }
+          {isLoading && <p className={classes.loading}>Loading.....</p>}
           <button
             type="button"
             className={classes.toggle}

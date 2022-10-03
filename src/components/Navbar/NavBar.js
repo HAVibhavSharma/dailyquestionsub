@@ -19,13 +19,15 @@ function NavBar() {
             <Nav className="me-auto">
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#link">About</Nav.Link>
-              <AuthForm Login />
               <Nav.Link href="#link">Subscription</Nav.Link>
               <Nav.Link href="#link">Contact Us</Nav.Link>
+              
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {/* <AuthForm Login /> */}
+      <AuthForm />
       <div>this is an addition</div>
     </>
   );
