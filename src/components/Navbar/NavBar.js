@@ -26,6 +26,7 @@ function NavBar() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <div>this is an addition</div>
     </>
   );
 }
