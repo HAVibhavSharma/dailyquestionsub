@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import NavBar from "../Navbar/NavBar";
 import classes from "./StartingPageContent.module.css";
-
+import React from "react";
 const StartingPageContent = () => {
   return (
     <>
