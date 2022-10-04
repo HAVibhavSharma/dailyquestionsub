@@ -1,18 +1,23 @@
 import { Container } from "react-bootstrap";
 import NavBar from "../Navbar/NavBar";
-import classes from "./StartingPageContent.module.css";
+import styles from "./StartingPageContent.module.css";
 import React from "react";
+import { $CombinedState } from "redux";
+
 const StartingPageContent = () => {
   return (
     <>
       <NavBar />
       <Container className="vh-100 vw-100">
-        <div className="d-flex flex-column flex-wrap justify-content-end">
-          <h1 className="pt-5 text-right">Welcome on Board</h1>
-          <p>
+        <div className={styles.container}>
+          <h1 className={styles.content}>Welcome on Board</h1>
+          <h3 className={styles.content}>
             dummy para dummy para dummy paradummy para dummy paradummy para
             dummy para
-          </p>
+          </h3>
+          <a href="/" className={`${styles["content"]} ${styles["button"]}`}>
+            Sign-In
+          </a>
         </div>
       </Container>
     </>

@@ -1,8 +1,20 @@
-.starting {
-  margin: 3rem auto;
-  text-align: center;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: calc(100% * calc(3 / 10));
 }
-
-.starting h1 {
-  font-size: 5rem;
+.content {
+  width: 500px;
+  padding: 5px;
+  text-align: justify;
+}
+.content.button {
+  border: 2px solid black;
+  width: fit-content;
+  text-decoration: none;
+  background-color: whitesmoke;
+  color: black;
+  padding: 10px;
+  margin-right: calc(100% * calc(2 / 10));
 }
