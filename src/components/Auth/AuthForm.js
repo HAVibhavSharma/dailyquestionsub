@@ -1,12 +1,27 @@
-import { useRef, useState } from "react";
+import { data } from "jquery";
+import { useRef, useState, useContext } from "react";
+import AuthContext from "../../store/auth-context";
+import { useSelector, useDispatch } from "react-redux";
+import { tokenActions } from "../../store/reducer";
+import { Link } from "react-router-dom";
 
 import classes from "./AuthForm.module.css";
 
 const AuthForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
+
+  const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
+  
+
+  
+  // const authctx = useContext(AuthContext);
+
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+
+  // const navigate = useNavigate();
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
@@ -19,38 +34,51 @@ const AuthForm = () => {
     const enteredPassword = passwordInputRef.current.value;
 
     setIsLoading(true);
-
+    let url;
     if (isLogin) {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCpBsqPH06BnUspyjHyOD4X47Z70OcVpgI";
     } else {
-      fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCpBsqPH06BnUspyjHyOD4X47Z70OcVpgI",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: enteredEmail,
-            password: enteredPassword,
-            returnSecureToken: true,
-          }),
-          headers: {
-            "Content-Type": "application/json",
-          }
-        }
-      ).then(res => {
+      url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCpBsqPH06BnUspyjHyOD4X47Z70OcVpgI";
+    }
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        returnSecureToken: true,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
         setIsLoading(false);
-        if(res.ok){
+        if (res.ok) {
+          return res.json();
+        } else {
+          return res.json().then((data) => {
+            let errorMessage = 'Authentication failed!';
+            // if (data && data.error && data.error.message) {
+            //   errorMessage = data.error.message;
+            // }
 
-        }else {
-          res.json().then(data =>{
-            let errormessage = "Authentication failed";
-            if (data && data.error && data.error.message){
-              errormessage = data.error.message
-            }
-            // alert(errormessage);
-            return  document.getElementById("return").innerHTML = errormessage;
+            throw new Error(errorMessage);
           });
         }
+      })
+      .then((data) => {
+        dispatch(tokenActions.loginhandler(data.idToken));
+        <Link to='/'>Login</Link>
+        // history('https://www.youtube.com/watch?v=gXSlzUSQO0A');
+        // dispatch.login(data.idToken);
+        // authcxt.login(data.idTocken);
+        // console.log(data);
+      })
+      .catch((err) => {
+        alert(err.message);
       });
-    }
   };
 
   return (
@@ -70,9 +98,11 @@ const AuthForm = () => {
             ref={passwordInputRef}
           />
         </div>
-        <div id ='return' className={classes.return}></div>
+        <div id="return" className={classes.return}></div>
         <div className={classes.actions}>
-          {!isLoading && <button>{isLogin ? "Login" : "Create Account"}</button> }
+          {!isLoading && (
+            <button>{isLogin ? "Login" : "Create Account"}</button>
+          )}
           {isLoading && <p className={classes.loading}>Loading.....</p>}
           <button
             type="button"

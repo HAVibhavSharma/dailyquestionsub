@@ -2,12 +2,22 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 // import { createStore } from "redux";
 // the reducer will return an object
-const counterslice = createSlice({
-  name: "counter",
-  initialState: { counter: 0 },
+const tokenslice = createSlice({
+  name: "token",
+  initialState: {
+    token: "",
+    islogin: false,
+    // login: (token) => {},
+    // logout: () => {},
+  },
   reducers: {
-    increment(state) {
-      state.counter++;
+    loginhandler(state,actions) {
+      state.islogin = true;
+      state.token = actions.payload;
+    },
+    logouthandler(state) {
+      state.islogin = false;
+      state.token = null;
     },
   },
 });
@@ -24,8 +34,8 @@ const counterslice = createSlice({
 
 // const store = createStore(counterslice.reducer);
 const store = configureStore({
-  reducer: counterslice.reducer,
+  reducer: tokenslice.reducer,
 });
-export const counterActions = counterslice.actions;
+export const tokenActions = tokenslice.actions;
 
 export default store;
