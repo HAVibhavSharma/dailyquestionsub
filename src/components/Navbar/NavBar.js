@@ -4,14 +4,13 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useSelector, useDispatch } from "react-redux";
-import { counterActions } from "../../store/reducer";
+// import { counterActions } from "../../store/reducer";
 import AuthForm from "../Auth/AuthForm";
+import MainNavigation from "../Layout/MainNavigation";
+
 function NavBar() {
-  const counter = useSelector((state) => state.counter);
+  // const counter = useSelector((state) => state.counter);
   const dispatch = useDispatch();
-  const increment = () => {
-    dispatch(counterActions.increment());
-  };
   return (
     <>
       <Navbar bg="light" expand="lg" fixed="top">
@@ -26,14 +25,14 @@ function NavBar() {
               <Nav.Link href="#link">Subscription</Nav.Link>
               <Nav.Link href="#link">About</Nav.Link>
               <Nav.Link href="#link">Contact Us</Nav.Link>
-              <Nav.Link onClick={increment}>increment</Nav.Link>
+              {/* <Nav.Link onClick={increment}>increment</Nav.Link> */}
             </Nav>
-          </Navbar.Collapse>
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>{counter}</Navbar.Text>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {/* <AuthForm Login /> */}
+      <AuthForm />
+      <div>this is an addition</div>
     </>
   );
 }
