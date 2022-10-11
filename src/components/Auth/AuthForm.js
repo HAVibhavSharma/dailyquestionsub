@@ -37,10 +37,10 @@ const AuthForm = () => {
     let url;
     if (isLogin) {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCpBsqPH06BnUspyjHyOD4X47Z70OcVpgI";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDPW0cGa0Bc5TlnFkJBg-fxluptNkSko8E";
     } else {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCpBsqPH06BnUspyjHyOD4X47Z70OcVpgI";
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDPW0cGa0Bc5TlnFkJBg-fxluptNkSko8E";
     }
     fetch(url, {
       method: 'POST',
